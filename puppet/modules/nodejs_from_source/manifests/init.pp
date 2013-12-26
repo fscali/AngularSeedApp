@@ -3,8 +3,13 @@ class nodejs_from_source
 
   package { "build-essential":
       ensure  => present,
-	  require => Exec["apt-get update"]
-    }
+      require => Exec["apt-get update"]
+  }
+  package {"libfontconfig":
+    ensure  => present,
+    require => Exec["apt-get update"]
+
+  }
 
   file { "/usr/local/src/node-latest/":
     mode   => 777,
