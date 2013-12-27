@@ -54,7 +54,7 @@ class nodejs_from_source
   }
   exec { "install_dependencies":
     command => "npm install",
-    cwd     => "/home/vagrant/dev",
+    cwd     => "/home/vagrant/dev/SeedApp",
     path    => "usr/bin:/usr/sbin:/bin:/usr/local/bin",
     require => Exec["install-nodejs-build-artifact"]
   }
