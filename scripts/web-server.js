@@ -6,25 +6,18 @@ var util  	   = require('util'),
 	fs         = require('fs'),
 	url        = require('url'),
 	events     = require('events'),
-	path       = require('path'),
 	app        = express(),
-	appBaseDir = path.resolve(__dirname + '/../app/');
-
-
+	siteutils  = require('../app/siteutils'),
+	site 	   = require('../app/routes/site'),
+	appBaseDir = siteutils.appBaseDir;
 
 app.use(express.static(appBaseDir + '/public/'));
 
 var DEFAULT_PORT = 8000;
 
 
-app.get('/', function(req, res){
-  res.sendfile(appBaseDir + '/index.html' );
-
-});
-app.get('/partials/:partialname', function(req, res){
-	res.sendfile(appBaseDir + '/partials/' + req.params.partialname);
-
-});
+app.get('/', site.index);
+app.get('/partials/:partialname', site.partials);
 
 app.listen(DEFAULT_PORT);
 console.log("Now listening on port " + DEFAULT_PORT + ", dirname: " + __dirname);
